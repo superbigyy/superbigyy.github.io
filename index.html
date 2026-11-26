@@ -41,6 +41,19 @@ h1 em{font-style:normal;background:linear-gradient(120deg,var(--a),var(--b));-we
 .term-bar span{margin-left:auto;font-size:.72rem;color:var(--muted)}
 .term pre{padding:1.3rem;font-size:.82rem;line-height:1.8;overflow-x:auto}
 .k{color:#c792ea}.s{color:#a5e8a0}.f{color:#82aaff}.c{color:#5c6480}
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:3rem}
+.stat{background:var(--card);padding:1.4rem 1rem;text-align:center}
+.stat b{display:block;font-size:1.5rem;font-family:'JetBrains Mono',monospace;background:linear-gradient(120deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:.75rem;color:var(--muted)}
+/* diagnostic log */
+.log{background:#0e1019;border-radius:10px;padding:1.1rem 1.3rem;font-size:.8rem;line-height:1.9;overflow-x:auto;margin-top:1rem}
+.log .ok2{color:var(--ok)}.log .mut{color:var(--muted)}.log .warn{color:#fbbf24}
+/* toolkit */
+.tool{display:flex;align-items:center;gap:1rem;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem}
+.tool .ic{font-size:1.4rem;width:44px;height:44px;border-radius:10px;background:rgba(124,108,255,.12);display:grid;place-items:center;flex-shrink:0}
+.tool h4{font-size:.92rem;margin-bottom:.15rem}
+.tool p{font-size:.78rem;color:var(--muted)}
 /* skills */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.3rem}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1.8rem;transition:transform .25s,border-color .25s}
@@ -62,6 +75,7 @@ h1 em{font-style:normal;background:linear-gradient(120deg,var(--a),var(--b));-we
 .exp ul{list-style:none;margin:1rem 0}
 .exp li{color:var(--muted);font-size:.9rem;padding-left:1.4rem;position:relative;margin-bottom:.35rem}
 .exp li::before{content:"→";position:absolute;left:0;color:var(--b)}
+.exp-tabs{display:flex;gap:6px;margin-top:1.4rem;border-top:1px solid var(--line);padding-top:1.2rem}
 /* projects */
 .proj-top{height:150px;border-radius:12px;margin-bottom:1.3rem;display:grid;place-items:center;font-size:3rem;border:1px solid var(--line)}
 .feat{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.2fr;gap:2rem;align-items:center;border-color:rgba(124,108,255,.35);background:linear-gradient(135deg,rgba(124,108,255,.10),var(--card) 60%)}
@@ -80,81 +94,116 @@ h1 em{font-style:normal;background:linear-gradient(120deg,var(--a),var(--b));-we
 footer{text-align:center;padding:2rem;color:var(--muted);font-size:.82rem;border-top:1px solid var(--line)}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
-@media(max-width:820px){#hero,.feat{grid-template-columns:1fr}nav ul{display:none}.exp{flex-direction:column}section{padding:72px 6%}}
+@media(max-width:820px){#hero,.feat{grid-template-columns:1fr}nav ul{display:none}.exp{flex-direction:column}section{padding:72px 6%}.stats{grid-template-columns:repeat(2,1fr)}.card[style*="span 2"]{grid-column:span 1!important}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <nav>
   <div class="logo mono">KSE<span>.</span></div>
-  <ul><li><a href="#skills">Skills</a></li><li><a href="#experience">Experience</a></li><li><a href="#projects">Projects</a></li><li><a href="#contact">Contact</a></li></ul>
+  <ul><li><a href="#skills">Skills</a></li><li><a href="#toolkit">Toolkit</a></li><li><a href="#experience">Experience</a></li><li><a href="#projects">Projects</a></li><li><a href="#contact">Contact</a></li></ul>
   <a href="#contact" class="btn btn-p nav-btn">Hire Me</a>
 </nav>
 
 <section id="hero">
   <div>
-    <div class="status mono"><span class="dot"></span>Open to work</div>
-    <h1>Hi, I'm Seif Eddine.<br/>I build <em>modern web</em> products.</h1>
-    <p class="lead">IT student and web developer, passionate about building modern web experiences and solving real-world problems through technology.</p>
+    <div class="status mono"><span class="dot"></span>System online · Open to work</div>
+    <h1>Seif Eddine Kerioudj.<br/>Dev &amp; <em>mobile systems</em> engineer.</h1>
+    <p class="lead">I build web applications and I repair, diagnose and secure mobile devices — from code to circuit board, I work across the full stack of modern technology.</p>
     <div class="cta">
       <a href="#projects" class="btn btn-p">View my work →</a>
       <a href="#contact" class="btn btn-o">Contact me</a>
     </div>
   </div>
   <div class="term">
-    <div class="term-bar"><i></i><i></i><i></i><span class="mono">seif.js</span></div>
-<pre class="mono"><span class="k">const</span> <span class="f">developer</span> = {
-  name: <span class="s">"Kerioudj Seif Eddine"</span>,
-  role: <span class="s">"IT Student · Web Developer"</span>,
-  stack: [<span class="s">"JavaScript"</span>, <span class="s">"Python"</span>, <span class="s">"Node.js"</span>],
-  fixes: <span class="s">"phones too 📱"</span>,
-  openToWork: <span class="k">true</span>
-};
-<span class="c">// let's build something together</span></pre>
+    <div class="term-bar"><i></i><i></i><i></i><span class="mono">diagnostics.sh</span></div>
+<pre class="mono"><span class="c">$</span> <span class="f">run</span> device_scan --target iphone
+<span class="k">[</span><span class="s">OK</span><span class="k">]</span> connection established
+<span class="k">[</span><span class="s">OK</span><span class="k">]</span> hardware check ....... passed
+<span class="k">[</span><span class="s">OK</span><span class="k">]</span> iOS system ........... verified
+<span class="k">[</span><span class="s">OK</span><span class="k">]</span> iCloud status ......... secure
+<span class="c">$</span> <span class="f">status</span> --engineer
+<span class="k">{</span> stack: <span class="s">[js, python, node]</span>, repair: <span class="s">true</span> <span class="k">}</span></pre>
+  </div>
+  <div class="stats rv">
+    <div class="stat"><b>2+</b><span>disciplines mastered</span></div>
+    <div class="stat"><b>1yr</b><span>mobile repair exp.</span></div>
+    <div class="stat"><b>iOS</b><span>&amp; Android systems</span></div>
+    <div class="stat"><b>24/7</b><span>problem solver</span></div>
   </div>
 </section>
 
 <section id="skills">
-  <h2>Programming skills</h2>
-  <p class="sub">The languages and tools I use to bring ideas to life.</p>
+  <h2>Technical skills</h2>
+  <p class="sub">Software engineering and mobile systems engineering: the stack I operate on every day.</p>
   <div class="grid">
     <div class="card rv">
-      <h3>🌐 Frontend</h3><p>HTML, CSS, JavaScript</p>
+      <h3>🌐 Frontend Engineering</h3><p>HTML, CSS, JavaScript</p>
       <div class="bar"><div><span>HTML / CSS</span><span>85%</span></div><div class="track"><div class="fill" data-w="85"></div></div></div>
       <div class="bar"><div><span>JavaScript</span><span>70%</span></div><div class="track"><div class="fill" data-w="70"></div></div></div>
     </div>
     <div class="card rv">
-      <h3>⚙️ Backend</h3><p>Node.js, Python</p>
+      <h3>⚙️ Backend Engineering</h3><p>Node.js, Python</p>
       <div class="bar"><div><span>Python</span><span>70%</span></div><div class="track"><div class="fill" data-w="70"></div></div></div>
       <div class="bar"><div><span>Node.js</span><span>65%</span></div><div class="track"><div class="fill" data-w="65"></div></div></div>
     </div>
     <div class="card rv">
-      <h3>🗄️ Database</h3><p>SQL / MySQL</p>
+      <h3>🗄️ Databases</h3><p>SQL / MySQL</p>
       <div class="bar"><div><span>SQL / MySQL</span><span>60%</span></div><div class="track"><div class="fill" data-w="60"></div></div></div>
     </div>
     <div class="card rv">
-      <h3>🛠️ Tools</h3><p>Git, GitHub, VS Code, Linux</p>
+      <h3>🛠️ Dev Tools</h3><p>Git, GitHub, VS Code, Linux</p>
       <div class="bar"><div><span>Git &amp; GitHub</span><span>75%</span></div><div class="track"><div class="fill" data-w="75"></div></div></div>
       <div class="chips"><span class="chip">VS Code</span><span class="chip">Linux</span></div>
     </div>
+    <div class="card rv" style="grid-column:span 2">
+      <h3>📱 Mobile Systems &amp; Security</h3><p>Hardware repair, iOS/Android systems and account security</p>
+      <div class="bar"><div><span>Hardware diagnostics &amp; repair</span><span>85%</span></div><div class="track"><div class="fill" data-w="85"></div></div></div>
+      <div class="bar"><div><span>iOS system &amp; firmware</span><span>80%</span></div><div class="track"><div class="fill" data-w="80"></div></div></div>
+      <div class="bar"><div><span>iCloud / Apple ID security</span><span>75%</span></div><div class="track"><div class="fill" data-w="75"></div></div></div>
+      <div class="chips">
+        <span class="chip">Screen lock removal (own device)</span>
+        <span class="chip">Carrier / SIM unlock</span>
+        <span class="chip">Apple ID recovery (with proof of ownership)</span>
+        <span class="chip">Firmware flashing &amp; iOS restore</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="toolkit">
+  <h2>Toolkit</h2>
+  <p class="sub">Platforms and systems I work on day to day.</p>
+  <div class="grid">
+    <div class="tool rv"><div class="ic">🍎</div><div><h4>iOS devices</h4><p>iPhone / iPad hardware &amp; system repair</p></div></div>
+    <div class="tool rv"><div class="ic">🤖</div><div><h4>Android devices</h4><p>Hardware &amp; firmware troubleshooting</p></div></div>
+    <div class="tool rv"><div class="ic">☁️</div><div><h4>Apple iCloud</h4><p>Account security &amp; recovery</p></div></div>
+    <div class="tool rv"><div class="ic">💻</div><div><h4>Linux &amp; Windows</h4><p>System setup &amp; diagnostics</p></div></div>
   </div>
 </section>
 
 <section id="experience">
   <h2>Experience</h2>
-  <p class="sub">Hands-on professional experience beyond the classroom.</p>
+  <p class="sub">Hands-on technical experience beyond the classroom.</p>
   <div class="exp rv">
     <div class="exp-ico">📱</div>
-    <div>
-      <div class="exp-head"><h3>Réparation de téléphones</h3><span class="badge mono">1 an d'expérience</span></div>
-      <p style="color:var(--muted);font-size:.92rem">Diagnostic et réparation de smartphones, matériel et logiciel.</p>
+    <div style="flex:1">
+      <div class="exp-head"><h3>Mobile Repair Technician</h3><span class="badge mono">1 year of experience</span></div>
+      <p style="color:var(--muted);font-size:.92rem">Diagnosing and repairing smartphones at hardware and system level, with a focus on iOS devices and account security.</p>
       <ul>
-        <li>Remplacement d'écrans, batteries et connecteurs de charge</li>
-        <li>Diagnostic des pannes matérielles et logicielles</li>
-        <li>Installation et dépannage des systèmes</li>
-        <li>Accueil et conseil des clients</li>
+        <li>Replacing screens, batteries and charging ports</li>
+        <li>Diagnosing hardware and software faults</li>
+        <li>Installing, flashing and troubleshooting operating systems</li>
+        <li>Handling iCloud / Apple ID security and recovery cases</li>
+        <li>Welcoming and advising customers</li>
       </ul>
-      <div class="chips" style="margin-top:0"><span class="chip">Diagnostic</span><span class="chip">Hardware</span><span class="chip">Software</span><span class="chip">Service client</span></div>
+      <div class="log mono">
+<span class="mut">&gt;</span> device: iPhone — <span class="ok2">status: repaired</span>
+<span class="mut">&gt;</span> module: screen/battery — <span class="ok2">PASS</span>
+<span class="mut">&gt;</span> system: iOS — <span class="ok2">restored &amp; verified</span>
+<span class="mut">&gt;</span> security: iCloud — <span class="warn">owner verification required</span>
+      </div>
+      <div class="chips" style="margin-top:1.1rem"><span class="chip">Diagnostics</span><span class="chip">Hardware</span><span class="chip">Software</span><span class="chip">iOS system</span><span class="chip">iCloud security</span><span class="chip">Customer service</span></div>
     </div>
   </div>
 </section>
